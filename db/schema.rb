@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_21_200412) do
+ActiveRecord::Schema.define(version: 2023_05_22_023123) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(version: 2023_05_21_200412) do
     t.integer "pay_method"
     t.integer "exposes_work"
     t.boolean "attended"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "username", null: false
+    t.string "email", null: false
+    t.integer "rol", default: 2
+    t.string "password_digest"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

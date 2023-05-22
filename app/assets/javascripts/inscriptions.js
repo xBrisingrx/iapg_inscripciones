@@ -7,7 +7,7 @@ function modal_disable_inscription(id) {
 
 $(document).ready(function(){
   inscriptions_table = $("#inscriptions_table").DataTable({
-    'ajax': 'inscriptions',
+    'ajax': '/inscriptions',
     'columns': [
       {'data': 'company'},
       {'data': 'name'},
@@ -41,12 +41,13 @@ $(document).ready(function(){
 })
 
 function display_transfer_file() {
-  let transfer_file = document.querySelector('#inscription_transfer_file')
+  let transfer_file = document.querySelector('#inscription_file_transfer')
   if (event.target.value == 'transfer') {
     transfer_file.parentElement.style.display = ''
     transfer_file.required = true
   } else {
     transfer_file.parentElement.style.display = 'none'
     transfer_file.required = false
+    transfer_file.value = ''
   }
 }

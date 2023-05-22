@@ -1,4 +1,5 @@
 class InscriptionsController < ApplicationController
+  skip_before_action :no_login, only: %i[ new create credential show ]
   before_action :set_inscription, only: %i[ show edit update destroy ]
 
   # GET /inscriptions or /inscriptions.json
@@ -28,8 +29,7 @@ class InscriptionsController < ApplicationController
   # POST /inscriptions or /inscriptions.json
   def create
     @inscription = Inscription.new(inscription_params)
-    @inscription.exposes_work = ( params[:exposes_work] == 'on' )
-
+    @inscription.exposes_work = ( !params[:inscription][:exposes_work].nil? )
     respond_to do |format|
       if @inscription.save
         generate_credential_qr(@inscription)
