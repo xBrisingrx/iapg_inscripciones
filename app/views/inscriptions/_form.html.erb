@@ -43,22 +43,6 @@
     </div>
   </div>
 
-  <div class="form-group row g-mb-10">
-    <div class="col-sm-4 col-md-2">
-      <%= form.label :pay_method, 'Forma de pago:', class: " col-form-label g-mb-10" %> <br>
-      <small class="form-control-feedback text-danger inscription_pay_method"></small>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <%= form.radio_button :pay_method, 'credit_card', onclick: 'display_transfer_file()'%> Tarjeta de credito <br>
-      <%= form.radio_button :pay_method, 'transfer', onclick: 'display_transfer_file()'%> Transferencia
-      <label class="ml-2 u-file-attach-v2 g-color-gray-dark-v5 mb-0" style="display: none;">
-        <input id="inscription_file_transfer" name="inscription[file_transfer]" type="file">
-        <i class="icon-cloud-upload g-font-size-16 g-pos-rel g-top-2 g-mr-5"></i>
-        <span class="js-value">Adjuntar comprobante</span>
-      </label>
-    </div>
-  </div>
-
   <!-- Toggles Checkbox -->
   <div class="form-group">
     <label class="d-flex align-items-center">

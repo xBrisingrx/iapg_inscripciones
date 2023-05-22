@@ -9,7 +9,7 @@ class Inscription < ApplicationRecord
       message: 'Ingrese un correo valido'
     }
 
-  validates :pay_method, presence: { message: 'Seleccione un metodo de pago' }
+  # validates :pay_method, presence: { message: 'Seleccione un metodo de pago' }
   validates :dni, presence: true,
   	numericality: { only_integer: true, message: 'Ingrese su numero de dni sin puntos' }
 
