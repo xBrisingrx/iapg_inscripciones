@@ -31,13 +31,8 @@
         </p>
 
         <p>
-          <strong>Metodo de pago:</strong>
-          <%= @inscription.show_pay_method %>
-        </p>
-
-        <p>
           <strong>Expone:</strong>
-          <%= (@inscription.exposes_work) ? 'Si' : 'No' %>
+          <%= (@inscription.exposes_work?) ? 'Si' : 'No' %>
         </p>
 
         <p>Se le envio un email con el codigo QR que se muestra a continuación, el cual debe presentar al momento de ingresar al evento.</p>
