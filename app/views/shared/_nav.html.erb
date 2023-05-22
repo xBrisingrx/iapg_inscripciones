@@ -1,0 +1,86 @@
+    <!-- Header -->
+    <header id="js-header" class="u-header" data-header-fix-moment="500" data-header-fix-effect="slide">
+      <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-10" data-header-fix-moment-exclude="g-bg-white g-py-10" data-header-fix-moment-classes="g-bg-white-opacity-0_7 u-shadow-v18 g-py-0">
+        <nav class="js-mega-menu navbar navbar-expand-lg">
+          <div class="container">
+            <!-- Responsive Toggle Button -->
+            <button class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-top-3 g-right-0" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
+              <span class="hamburger hamburger--slider">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+              </span>
+              </span>
+            </button>
+            <!-- End Responsive Toggle Button -->
+            <!-- Logo -->
+            <%= link_to root_path, class: 'navbar-brand mr-4' do %>
+              <%= image_tag('logo.png', alt: 'Logo') %>
+            <% end %>
+            <!-- End Logo -->
+
+            <!-- Navigation -->
+            <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 " id="navBar">
+              <ul class="navbar-nav mr-auto text-uppercase g-font-weight-600 u-main-nav-v5 u-sub-menu-v1">
+                <li class="nav-item hs-has-sub-menu g-mx-20--lg g-mb-5 g-mb-0--lg"> 
+                  <%= link_to 'Afiliados', people_path, class: 'nav-link', id: 'nav-example', 
+                    aria: { haspopup: "true", expanded: 'false', controls: 'nav-submenu-1' } %>
+                  <!-- Submenu personas -->
+                  <ul class="hs-sub-menu list-unstyled g-mt-20--lg g-mt-10--lg--scrolling" id="nav-submenu-example" aria-labelledby="nav-example">
+                    <li><%= link_to 'Example', '#' %></li>
+                  </ul>
+                </li>
+                <li class="nav-item g-mx-20--lg g-mb-5 g-mb-0--lg"> 
+                  <%= link_to 'Sedes', headquarters_path, class: 'nav-link' %>
+                </li>
+                <li class="nav-item g-mx-20--lg g-mb-5 g-mb-0--lg"> 
+                  <%= link_to 'Partidos', politic_parties_path, class: 'nav-link' %>
+                </li>
+              </ul>
+            </div>
+            <!-- End Navigation -->
+            <div class="col-auto d-flex g-pt-5 g-pt-0--sm g-pl-10 g-pl-20--sm">
+            <div class="g-pos-rel g-px-10--lg hs-has-sub-menu">
+              <a id="profileMenuInvoker" class="d-block" href="#" aria-controls="profileMenu" aria-haspopup="true" aria-expanded="false" data-dropdown-event="click" data-dropdown-target="#profileMenu" data-dropdown-type="css-animation" data-dropdown-duration="300"
+              data-dropdown-animation-in="fadeIn" data-dropdown-animation-out="fadeOut">
+                <span class="g-pos-rel">
+                  <span class="u-badge-v2--xs u-badge--top-right g-hidden-sm-up g-bg-secondary g-mr-5"></span>
+                  <%= image_tag('user.png', alt: "User description" ,class: 'g-width-30 g-width-40--md g-height-30 g-height-40--md rounded-circle g-mr-10--sm' ) %>
+                </span>
+              </a>
+              <!-- Top User Menu -->
+              <ul id="profileMenu" class="hs-sub-menu list-unstyled g-mt-20--lg g-mt-10--lg--scrolling" aria-labelledby="profileMenuInvoker">
+                <li class="g-hidden-sm-up g-mb-10 ">
+                  <a class="media g-py-5 g-px-20" href="#">
+                    <span class="d-flex align-self-center g-mr-12">
+                      <i class="hs-admin-bell"></i>
+                    </span>
+                    <span class="media-body align-self-center">Notifications</span>
+                  </a>
+                </li>
+                <li class="g-mb-10">
+                  <a class="media g-color-primary--hover g-py-5 g-px-20" href="#">
+                    <span class="d-flex align-self-center g-mr-12">
+                      <i class="hs-admin-user"></i>
+                    </span>
+                    <span class="media-body align-self-center">Mi perfil</span>
+                  </a>
+                </li>
+                <li class="mb-0">
+                  <%= link_to logout_path, class: 'media g-color-primary--hover g-py-5 g-px-20' do %>
+                    <span class="d-flex align-self-center g-mr-12">
+                      <i class="hs-admin-shift-right"></i>
+                    </span>
+                    <span class="media-body align-self-center"> Cerrar sessión</span>
+                  <% end %>
+                </li>
+              </ul>
+              <!-- End Top User Menu -->
+            </div>
+          </div>
+          <!-- End Top User -->
+        </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->

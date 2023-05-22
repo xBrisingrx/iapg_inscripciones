@@ -1,0 +1,81 @@
+<%= form_with(model: inscription, remote: true, multipart: true, class: 'g-brd-around g-brd-gray-light-v4 g-pa-10 g-mb-10', id: 'form-inscription') do |form| %>
+  <% if inscription.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(inscription.errors.count, "error") %> prohibited this inscription from being saved:</h2>
+
+      <ul>
+      <% inscription.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group row g-mb-10">
+    <%= form.label :company, 'Empresa (*):', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+    <div class="col-sm-6 col-md-4">
+      <%= form.text_field :company, class: "form-control u-form-control", placeholder: 'Ingrese emnpresa' ,required: true  %>
+      <small class="form-control-feedback text-danger inscription_company"></small>
+    </div>
+  </div>
+
+  <div class="form-group row g-mb-10">
+    <%= form.label :name, 'Nombre (*):', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+    <div class="col-sm-6 col-md-4">
+      <%= form.text_field :name, class: "form-control u-form-control", placeholder: 'Ingrese nombre y apellido' ,required: true  %>
+      <small class="form-control-feedback text-danger inscription_name"></small>
+    </div>
+  </div>
+
+  <div class="form-group row g-mb-10">
+    <%= form.label :email, 'Email (*):', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+    <div class="col-sm-6 col-md-4">
+      <%= form.email_field :email, class: "form-control u-form-control", placeholder: 'Ingrese correo' ,required: true  %>
+      <small class="form-control-feedback text-danger inscription_email"></small>
+    </div>
+  </div>
+
+  <div class="form-group row g-mb-10">
+    <%= form.label :dni, 'DNI (*):', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+    <div class="col-sm-6 col-md-4">
+      <%= form.text_field :dni, class: "form-control u-form-control", placeholder: 'Ingrese DNI' ,required: true  %>
+      <small class="form-control-feedback text-danger inscription_dni"></small>
+    </div>
+  </div>
+
+  <div class="form-group row g-mb-10">
+    <div class="col-sm-4 col-md-2">
+      <%= form.label :pay_method, 'Forma de pago:', class: " col-form-label g-mb-10" %> <br>
+      <small class="form-control-feedback text-danger inscription_pay_method"></small>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <%= form.radio_button :pay_method, 'credit_card', onclick: 'display_transfer_file()'%> Tarjeta de credito <br>
+      <%= form.radio_button :pay_method, 'transfer', onclick: 'display_transfer_file()'%> Transferencia
+      <label class="ml-2 u-file-attach-v2 g-color-gray-dark-v5 mb-0" style="display: none;">
+        <input id="inscription_transfer_file" name="inscription[transfer_file]" type="file">
+        <i class="icon-cloud-upload g-font-size-16 g-pos-rel g-top-2 g-mr-5"></i>
+        <span class="js-value">Adjuntar comprobante</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Toggles Checkbox -->
+  <div class="form-group">
+    <label class="d-flex align-items-center">
+      <%= form.label :exposes_work, 'Expone algun trabajo? ', class: "col-form-label" %>
+      <!-- <span>Expone algun trabajo?</span> -->
+      <div class="ml-4 u-check">
+        <input class="g-hidden-xs-up g-pos-abs g-top-0 g-right-0" id="inscription_exposes_work" name="inscription[exposes_work]" type="checkbox">
+        <div class="u-check-icon-radio-v8">
+          <i class="fa" data-check-icon=""></i>
+        </div>
+      </div>
+    </label>
+  </div>
+  <!-- End Toggles Checkbox -->
+
+  <div class="actions">
+    <%= form.submit 'Inscribirse', 
+          class: 'btn btn-xl btn-block u-btn-3d u-btn-primary g-font-weight-600 g-letter-spacing-0_5 g-mr-10 g-mb-15' %>
+  </div>
+<% end %>

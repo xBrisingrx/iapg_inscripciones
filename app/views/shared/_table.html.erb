@@ -1,0 +1,21 @@
+<div class="card g-brd-<%= color %> rounded g-mb-30">
+  <h3 class="card-header g-bg-<%= color %> g-brd-transparent g-color-white g-font-size-16 mb-2 rounded-0">
+    <i class="fa <%= icon %>"></i>
+    <%= title %>
+  </h3>
+   <div class="px-2  pb-2">
+    <table id="<%= table_id %>_table" class="table table-sm table-hover dt-responsive w-100 u-table--v1" data-show='show'>
+      <thead>
+        <tr>
+          <% col_names.each do |name| %>
+            <th><%= name %></th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- Completo con ajax -->
+      </tbody>
+    </table>
+  </div>
+</div>
