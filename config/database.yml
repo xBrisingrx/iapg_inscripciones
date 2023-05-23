@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: iapg_inscripciones_production
-  username: iapg_inscripciones
+  username: <%= ENV['DB_USERNAME_PRODUCTION'] %>
   password: <%= ENV['IAPG_INSCRIPCIONES_DATABASE_PASSWORD'] %>
