@@ -8,10 +8,7 @@ class InscriptionsController < ApplicationController
   end
 
   # GET /inscriptions/1 or /inscriptions/1.json
-  def show
-    
-    InscriptionNotifierMailer.notifier_inscription(@inscription).deliver_later
-  end
+  def show;end
 
   def credential
     @inscription = Inscription.find(params[:inscription_id])
