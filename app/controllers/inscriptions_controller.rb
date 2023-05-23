@@ -1,5 +1,5 @@
 class InscriptionsController < ApplicationController
-  skip_before_action :no_login, only: %i[ new create credential show ]
+  skip_before_action :no_login, only: %i[ new create show ]
   before_action :set_inscription, only: %i[ show edit update destroy ]
 
   # GET /inscriptions or /inscriptions.json
