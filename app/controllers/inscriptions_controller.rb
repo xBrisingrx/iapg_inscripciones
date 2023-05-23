@@ -29,7 +29,8 @@ class InscriptionsController < ApplicationController
   # POST /inscriptions or /inscriptions.json
   def create
     @inscription = Inscription.new(inscription_params)
-    @inscription.exposes_work = ( !params[:inscription][:exposes_work].nil? )
+    # @inscription.exposes_work = ( !params[:inscription][:exposes_work].nil? )
+    @inscription.celiac = ( !params[:inscription][:celiac].nil? )
     respond_to do |format|
       if @inscription.save
         generate_credential_qr(@inscription)
@@ -113,6 +114,6 @@ class InscriptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def inscription_params
-      params.require(:inscription).permit(:company, :name, :email, :dni, :pay_method, :exposes_work, :attended, :file_transfer)
+      params.require(:inscription).permit(:company, :name, :email, :dni, :pay_method, :exposes_work, :attended, :file_transfer, :celiac)
     end
 end
