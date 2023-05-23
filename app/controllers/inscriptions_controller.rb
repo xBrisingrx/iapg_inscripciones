@@ -36,7 +36,7 @@ class InscriptionsController < ApplicationController
         generate_pdf(@inscription)
         InscriptionNotifierMailer.notifier_inscription(@inscription).deliver_later
 
-        format.json { render json: { status: 'success', msg: 'Registro exitoso', url: inscription_url(@inscription) }, status: :created}
+        format.json { render json: { status: 'success', msg: 'Registro exitoso', url: te_esperamos_path(@inscription) }, status: :created}
         format.html { redirect_to inscription_url(@inscription), notice: "Inscription was successfully created." }
       else
         format.json { render json: @inscription.errors, status: :unprocessable_entity }
