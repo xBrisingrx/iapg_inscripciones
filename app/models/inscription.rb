@@ -37,7 +37,7 @@ class Inscription < ApplicationRecord
     
     # Create the QR code object
     # qrcode = RQRCode::QRCode.new("http://#{host}/posts/#{id}")
-    qrcode = RQRCode::QRCode.new("http://200.24.249.87:3050/inscriptions/#{self.id}/credential")
+    qrcode = RQRCode::QRCode.new("http://192.168.0.23/inscriptions/#{self.id}/credential")
 
     # Create a new PNG object
     png = qrcode.as_png(

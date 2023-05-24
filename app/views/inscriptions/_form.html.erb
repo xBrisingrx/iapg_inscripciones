@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="form-group row g-mb-10">
-    <%= form.label :company, 'Empresa (*):', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+    <%= form.label :company, 'Empresa/Institución:', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
     <div class="col-sm-6 col-md-4">
-      <%= form.text_field :company, class: "form-control u-form-control", placeholder: 'Ingrese emnpresa' ,required: true  %>
+      <%= form.text_field :company, class: "form-control u-form-control", placeholder: 'Ingrese empresa/institución' ,required: true  %>
       <small class="form-control-feedback text-danger inscription_company"></small>
     </div>
   </div>
 
   <div class="form-group row g-mb-10">
-    <%= form.label :name, 'Nombre (*):', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+    <%= form.label :name, 'Nombre:', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
     <div class="col-sm-6 col-md-4">
       <%= form.text_field :name, class: "form-control u-form-control", placeholder: 'Ingrese nombre y apellido' ,required: true  %>
       <small class="form-control-feedback text-danger inscription_name"></small>
@@ -28,7 +28,7 @@
   </div>
 
   <div class="form-group row g-mb-10">
-    <%= form.label :email, 'Email (*):', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+    <%= form.label :email, 'Email:', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
     <div class="col-sm-6 col-md-4">
       <%= form.email_field :email, class: "form-control u-form-control", placeholder: 'Ingrese correo' ,required: true  %>
       <small class="form-control-feedback text-danger inscription_email"></small>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="form-group row g-mb-10">
-    <%= form.label :dni, 'DNI (*):', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+    <%= form.label :dni, 'DNI:', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
     <div class="col-sm-6 col-md-4">
       <%= form.text_field :dni, class: "form-control u-form-control", placeholder: 'Ingrese DNI' ,required: true  %>
       <small class="form-control-feedback text-danger inscription_dni"></small>
@@ -46,10 +46,10 @@
   <!-- Toggles Checkbox -->
   <div class="form-group">
     <label class="d-flex align-items-center">
-      <%= form.label :exposes_work, 'Expone algun trabajo? ', class: "col-form-label" %>
+      <%= form.label :celiac, 'Es celiaco? ', class: "col-sm-4 col-md-2 col-form-label" %>
       <!-- <span>Expone algun trabajo?</span> -->
       <div class="ml-4 u-check">
-        <input class="g-hidden-xs-up g-pos-abs g-top-0 g-right-0" id="inscription_exposes_work" name="inscription[exposes_work]" type="checkbox">
+        <input class="g-hidden-xs-up g-pos-abs g-top-0 g-right-0" id="inscription_celiac" name="inscription[celiac]" type="checkbox">
         <div class="u-check-icon-radio-v8">
           <i class="fa" data-check-icon=""></i>
         </div>

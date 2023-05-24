@@ -4,6 +4,6 @@ json.data @inscriptions do |inscription|
 	json.dni inscription.dni
 	json.email inscription.email
 	json.pay_method ''
-	json.exposes_work (inscription.exposes_work?) ? 'Si' : 'No'
+	json.celiac (inscription.celiac?) ? 'Si' : 'No'
 	json.actions ""
 end

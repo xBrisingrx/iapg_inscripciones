@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'registrarse', to: 'inscriptions#new', as: 'registrarse'
+  get 'te_esperamos/:id', to: 'inscriptions#show', as: 'te_esperamos'
+
   resources :inscriptions do
     get 'credential'
   end

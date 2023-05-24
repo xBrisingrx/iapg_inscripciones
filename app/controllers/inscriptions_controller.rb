@@ -8,10 +8,7 @@ class InscriptionsController < ApplicationController
   end
 
   # GET /inscriptions/1 or /inscriptions/1.json
-  def show
-    
-    InscriptionNotifierMailer.notifier_inscription(@inscription).deliver_later
-  end
+  def show;end
 
   def credential
     @inscription = Inscription.find(params[:inscription_id])
@@ -29,14 +26,15 @@ class InscriptionsController < ApplicationController
   # POST /inscriptions or /inscriptions.json
   def create
     @inscription = Inscription.new(inscription_params)
-    @inscription.exposes_work = ( !params[:inscription][:exposes_work].nil? )
+    # @inscription.exposes_work = ( !params[:inscription][:exposes_work].nil? )
+    @inscription.celiac = ( !params[:inscription][:celiac].nil? )
     respond_to do |format|
       if @inscription.save
         generate_credential_qr(@inscription)
         generate_pdf(@inscription)
         InscriptionNotifierMailer.notifier_inscription(@inscription).deliver_later
 
-        format.json { render json: { status: 'success', msg: 'Registro exitoso', url: inscription_url(@inscription) }, status: :created}
+        format.json { render json: { status: 'success', msg: 'Registro exitoso', url: te_esperamos_path(@inscription) }, status: :created}
         format.html { redirect_to inscription_url(@inscription), notice: "Inscription was successfully created." }
       else
         format.json { render json: @inscription.errors, status: :unprocessable_entity }
@@ -113,6 +111,6 @@ class InscriptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def inscription_params
-      params.require(:inscription).permit(:company, :name, :email, :dni, :pay_method, :exposes_work, :attended, :file_transfer)
+      params.require(:inscription).permit(:company, :name, :email, :dni, :pay_method, :exposes_work, :attended, :file_transfer, :celiac)
     end
 end

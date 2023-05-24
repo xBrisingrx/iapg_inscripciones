@@ -14,7 +14,7 @@ $(document).ready(function(){
       {'data': 'dni'},
       {'data': 'email'},
       {'data': 'pay_method'},
-      {'data': 'exposes_work'},
+      {'data': 'celiac'},
       {'data': 'actions'}
     ],
     'language': {'url': datatables_lang}
