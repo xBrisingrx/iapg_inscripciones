@@ -4,7 +4,9 @@
 		<% if @limit %>
 			<h1> Se completo el cupo de inscripciones. </h1>
 		<% else %>
-			<%= render 'form', inscription: @inscription %>
+			<div class="col-12 col-sm-12 col-md-10">
+				<%= render 'form', inscription: @inscription %>
+			</div>
 		<% end %>
 	</div>
 </section>
