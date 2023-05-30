@@ -16,6 +16,8 @@ class InscriptionsController < ApplicationController
 
   # GET /inscriptions/new
   def new
+    inscriptions = Inscription.all
+    @limit = ( inscriptions.count >= 2 )
     @inscription = Inscription.new 
   end
 
