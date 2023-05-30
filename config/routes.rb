@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :inscriptions do
     get 'credential'
+    post 'disable', on: :collection
   end
   root 'inscriptions#index'
   get 'main/index'

@@ -20,6 +20,8 @@ class Inscription < ApplicationRecord
     transfer: 2
   }
 
+  scope :actives, -> { where(active:true)}
+
   def show_pay_method
     if self.pay_method == 'credit_card'
       'Tarjeta de credito'

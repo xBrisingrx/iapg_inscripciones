@@ -4,7 +4,7 @@ class InscriptionsController < ApplicationController
 
   # GET /inscriptions or /inscriptions.json
   def index
-    @inscriptions = Inscription.all
+    @inscriptions = Inscription.actives
   end
 
   # GET /inscriptions/1 or /inscriptions/1.json
@@ -16,7 +16,7 @@ class InscriptionsController < ApplicationController
 
   # GET /inscriptions/new
   def new
-    inscriptions = Inscription.all
+    inscriptions = Inscription.actives
     @limit = ( inscriptions.count >= 2 )
     @inscription = Inscription.new 
   end
@@ -28,7 +28,6 @@ class InscriptionsController < ApplicationController
   # POST /inscriptions or /inscriptions.json
   def create
     @inscription = Inscription.new(inscription_params)
-    # @inscription.exposes_work = ( !params[:inscription][:exposes_work].nil? )
     @inscription.celiac = ( !params[:inscription][:celiac].nil? )
     respond_to do |format|
       if @inscription.save
@@ -66,6 +65,20 @@ class InscriptionsController < ApplicationController
       format.html { redirect_to inscriptions_url, notice: "Inscription was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def disable
+    @inscription = Inscription.find(params[:inscription_id])
+
+    if @inscription.update(active:false)
+      render json: { status: 'success', msg: 'Inscripcion eliminada' }, status: :ok
+    else
+      render json: { status: 'error', msg: 'Ocurrio un error al realizar la operación' }, status: :unprocessable_entity
+    end
+
+    rescue => e
+      @response = e.message.split(':')
+      render json: { @response[0] => @response[1] }, status: 402
   end
 
   def generate_credential_qr inscription
