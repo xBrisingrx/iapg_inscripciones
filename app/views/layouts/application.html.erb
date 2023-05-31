@@ -11,6 +11,13 @@
   </head>
 
   <body>
+     <% if logged_in? %>
+     <div class="row mx-auto">
+        <%= link_to root_path, class: 'navbar-brand mx-auto' do %>
+          <%= image_tag('iapg_small.png', alt: 'Logo', height: "80") %>
+        <% end %>
+      </div>
+     <% end %>
      <main class="container-fluid">
         <%= yield %>
         <div class="modal fade" id="modal" role="dialog"
