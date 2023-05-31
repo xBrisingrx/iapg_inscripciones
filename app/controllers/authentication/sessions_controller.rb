@@ -8,15 +8,15 @@ class Authentication::SessionsController < ApplicationController
     user = User.find_by_username(params[:username])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: "Sessión iniciada!"
+      redirect_to root_path, info: "Sessión iniciada!"
     else
-      flash.now[:alert] = "Nombre de usuario o contraseña invalido"
+      flash.now[:danger] = "Nombre de usuario o contraseña invalido"
       render "new"
     end
   end  
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: "Logged out!"
+    redirect_to root_url, info: "Sesión cerrada."
   end
 end

@@ -32,7 +32,7 @@
         <% end %>
         <!-- End Form -->
         <% flash.each do |type, msg| %>
-          <div class="alert alert-danger" role="alert">
+          <div class="alert alert-<%= type %>" role="alert">
               <strong><i class="fa fa-exclamation-circle"></i></strong> <%= msg %>
           </div>
         <% end %>

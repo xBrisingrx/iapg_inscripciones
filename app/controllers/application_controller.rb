@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
   before_action :no_login
 
+  add_flash_types :info, :danger
+
   def switch_locale(&action)
     I18n.with_locale(locale_from_header, &action)
   end
