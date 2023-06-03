@@ -48,11 +48,11 @@ class InscriptionsController < ApplicationController
   def update
     respond_to do |format|
       if @inscription.update(inscription_params)
+        format.json { render json: { status: 'success', msg: 'Inscripción editada' }, status: :ok}
         format.html { redirect_to inscription_url(@inscription), notice: "Inscription was successfully updated." }
-        format.json { render :show, status: :ok}
       else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @inscription.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
