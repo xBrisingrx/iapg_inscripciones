@@ -1,16 +1,4 @@
 <%= form_with(model: inscription, remote: true, multipart: true, class: 'g-brd-around g-brd-gray-light-v4 g-pa-10 g-mb-10', id: 'form-inscription') do |form| %>
-  <% if inscription.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(inscription.errors.count, "error") %> prohibited this inscription from being saved:</h2>
-
-      <ul>
-      <% inscription.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="form-group row g-mb-10">
     <%= form.label :company, 'Empresa/Institución:', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
     <div class="col-sm-6 col-md-4">
@@ -49,10 +37,10 @@
       <%= form.label :celiac, 'Es celiaco? ', class: "col-sm-4 col-md-2 col-form-label" %>
       <!-- <span>Expone algun trabajo?</span> -->
       <div class="ml-4 u-check">
-        <input class="g-hidden-xs-up g-pos-abs g-top-0 g-right-0" id="inscription_celiac" name="inscription[celiac]" type="checkbox">
+        <%= form.check_box :celiac, class: 'g-hidden-xs-up g-pos-abs g-top-0 g-right-0'%>
         <div class="u-check-icon-radio-v8">
           <i class="fa" data-check-icon=""></i>
-        </div>
+        </div>        
       </div>
     </label>
   </div>
