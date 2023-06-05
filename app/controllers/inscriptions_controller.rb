@@ -23,6 +23,15 @@ class InscriptionsController < ApplicationController
 
   # GET /inscriptions/1/edit
   def edit
+    POS::Printer.print('nexus-1') do |p|
+      p.align_center
+      p.print_logo
+      p.big_font
+      p.text 'MY HEADER'
+      p.align_left
+      p.small_font
+      p.text 'some body'
+    end
   end
 
   # POST /inscriptions or /inscriptions.json
