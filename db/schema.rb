@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_22_023123) do
+ActiveRecord::Schema.define(version: 2023_06_06_214019) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 2023_05_22_023123) do
     t.boolean "attended"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "celiac", default: false
+    t.boolean "active", default: true
+    t.boolean "confirm", default: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci", force: :cascade do |t|

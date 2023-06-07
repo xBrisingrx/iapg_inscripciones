@@ -23,15 +23,6 @@ class InscriptionsController < ApplicationController
 
   # GET /inscriptions/1/edit
   def edit
-    POS::Printer.print('nexus-1') do |p|
-      p.align_center
-      p.print_logo
-      p.big_font
-      p.text 'MY HEADER'
-      p.align_left
-      p.small_font
-      p.text 'some body'
-    end
   end
 
   # POST /inscriptions or /inscriptions.json
@@ -93,7 +84,7 @@ class InscriptionsController < ApplicationController
   def generate_credential_qr inscription
     url = url_for(action: 'credential', inscription_id: inscription.id, only_path: false)
     # url = inscription_credential_path(inscription)
-    qrcode = RQRCode::QRCode.new( "http://200.24.249.87:3050/inscriptions/#{inscription.id}/credential" )
+    qrcode = RQRCode::QRCode.new( "http://192.168.1.10:3000/inscriptions/#{inscription.id}/credential" )
     png = qrcode.as_png(
       bit_depth: 1,
       border_modules: 4,
@@ -125,6 +116,55 @@ class InscriptionsController < ApplicationController
 
     receipt_pdf.image qr_image, :at => [120,500], :width => 300
     receipt_pdf.render_file File.join(Rails.root, "app/assets/images/inscriptions/#{inscription.id}", "inscripcion_iapg.pdf")
+  end
+
+  def pdf_inscription 
+    inscription = Inscription.find(params[:inscription_id])
+    dir = Rails.root.join("app/assets/iapg")
+    doc = HexaPDF::Document.open("#{dir}/iapg_ticket.pdf")
+    page = doc.pages[0]
+    canvas = page.canvas(type: :overlay)
+
+    if inscription.name.split.count > 2
+      large_text = inscription.name.split
+      name1 = "#{large_text[0]} #{large_text[1]}"
+
+      large_text.shift
+      large_text.shift
+      
+      name2 = ''
+      large_text.each do |t|
+        name2 += "#{t} "
+      end 
+      
+      canvas.font('Helvetica', size: 16).text(name1, at: [30, 80])
+      canvas.font('Helvetica', size: 16).text(name2, at: [30, 60])
+    else
+      canvas.font('Helvetica', size: 18).text(inscription.name, at: [30, 70])
+    end
+
+    if inscription.company.split.count > 2
+      large_text = inscription.company.split
+      
+    end
+    
+    canvas.font('Helvetica', size: 14).text(inscription.company, at: [10, 30])
+    filename = "#{inscription.dni}.pdf"
+    doc.write("#{dir}/#{filename}", optimize: true)
+
+    # custom_pdf = Prawn::Document.new(:page_size => [212,98])
+    # custom_pdf.draw_text 'un buen texto al medio', at: [50, 50]
+    # tl = HexaPDF::Layout::TextLayouter.new
+    # tl.style.align(:center).valign(:top)
+    # tl.fit([tf], 200, 40).draw(canvas, 30, 70)
+    # canvas.rectangle(0, 0, 0).rectangle(58, 431, 495, 30)
+    # custom_pdf.float do 
+    #   custom_pdf.text inscription.name, align: :center, valing: :top
+    # end
+    # custom_pdf.text inscription.company, valing: :bottom
+    #custom_pdf.render_file File.join(Rails.root, "app/assets/iapg", "customisado.pdf")
+
+    send_file( "#{dir}/#{filename}", filename: filename, type: 'application/pdf', disposition: 'attachment')
   end
 
   private

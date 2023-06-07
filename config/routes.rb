@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :inscriptions do
     get 'credential'
     post 'disable', on: :collection
+    get 'pdf_inscripcion/:inscription_id', to: 'inscriptions#pdf_inscription', as: 'pdf_inscripcion'
   end
   root 'inscriptions#index'
   get 'main/index'

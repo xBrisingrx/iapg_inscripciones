@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: inscriptions
+#
+#  id           :bigint           not null, primary key
+#  company      :string(255)
+#  name         :string(255)
+#  email        :string(255)
+#  dni          :string(255)
+#  pay_method   :integer
+#  exposes_work :integer
+#  attended     :boolean
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  celiac       :boolean          default(FALSE)
+#  active       :boolean          default(TRUE)
+#  confirm      :boolean          default(FALSE)
+#
 class Inscription < ApplicationRecord
 	has_one_attached :file_transfer
 	has_one_attached :qrcode
