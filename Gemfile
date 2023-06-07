@@ -34,7 +34,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'rqrcode', '~> 2.2'
 gem 'prawn', '~> 2.4'
-gem 'pos-printer'
+# gem 'pos-printer'
+# gem 'escpos'
+# gem 'zebra-zpl'
+gem 'hexapdf', '~> 0.16.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
