@@ -124,35 +124,75 @@ class InscriptionsController < ApplicationController
     doc = HexaPDF::Document.open("#{dir}/iapg_ticket.pdf")
     page = doc.pages[0]
     canvas = page.canvas(type: :overlay)
-
     if inscription.name.split.count > 2
       large_text = inscription.name.split
-      name1 = "#{large_text[0]} #{large_text[1]}"
-
-      large_text.shift
-      large_text.shift
-      
-      name2 = ''
-      large_text.each do |t|
-        name2 += "#{t} "
-      end 
-      
-      canvas.font('Helvetica', size: 16).text(name1, at: [30, 80])
-      canvas.font('Helvetica', size: 16).text(name2, at: [30, 60])
+      inscription_name = "#{large_text[0]} #{large_text[2]}"
     else
-      canvas.font('Helvetica', size: 18).text(inscription.name, at: [30, 70])
-    end
-
-    if inscription.company.split.count > 2
-      large_text = inscription.company.split
-      
+      inscription_name = inscription.name
     end
     
-    canvas.font('Helvetica', size: 14).text(inscription.company, at: [10, 30])
+    # canvas.font('Helvetica', size: 18, variant: :bold).text(inscription_name, at: [30, 70])
+    tf = HexaPDF::Layout::TextFragment.create( inscription_name,
+                                            font: doc.fonts.add("Helvetica"), font_size: 18)
+    tl = HexaPDF::Layout::TextLayouter.new
+    tl.style.align(:center).valign(:top)
+    tl.fit([tf], 212, 98).draw(canvas, 1, 80)
+
+    tf_com = HexaPDF::Layout::TextFragment.create( inscription.company,
+                                            font: doc.fonts.add("Helvetica"), font_size: 14)
+    tl_com = HexaPDF::Layout::TextLayouter.new
+
+    tl_com.style.align(:center).valign(:top)
+    tl_com.fit([tf_com], 212, 98).draw(canvas, 1, 40)
+    # if inscription.company.length > 24
+    #   large_text = inscription.company.split
+    #   y = 50
+    #   company_name = ''
+    #   large_text.each do |text|
+    #     company_name += "#{text} "
+    #     if company_name.length > 24
+    #       # canvas.font('Helvetica', size: 12).text(company_name, at: [25, y])
+    #       tf = HexaPDF::Layout::TextFragment.create( company_name,
+    #                                         font: doc.fonts.add("Helvetica"), font_size: 12)
+    #       tl = HexaPDF::Layout::TextLayouter.new
+    #       tl.style.align(:center).valign(:top)
+    #       tl.fit([tf], 212, 98).draw(canvas, 1, y)
+    #       y -= 15
+    #       company_name = ''
+    #     end
+    #   end
+    #   y -= 15
+    #   # canvas.font('Helvetica', size: 12).text(company_name, at: [25, y])
+    #   tf = HexaPDF::Layout::TextFragment.create( company_name,
+    #                                         font: doc.fonts.add("Helvetica"), font_size: 12)
+    #   tl = HexaPDF::Layout::TextLayouter.new
+    #   tl.style.align(:center).valign(:top)
+    #   tl.fit([tf], 212, 98).draw(canvas, 1, y)
+    # else
+    #   # canvas.font('Helvetica', size: 14).text(inscription.company, at: [10, 30])
+    #   tf = HexaPDF::Layout::TextFragment.create( inscription.company,
+    #                                         font: doc.fonts.add("Helvetica"), font_size: 14)
+    #   tl = HexaPDF::Layout::TextLayouter.new
+
+    #   tl.style.align(:center).valign(:top)
+    #   tl.fit([tf], 212, 98).draw(canvas, 1, 40)
+    #   # canvas.stroke_color(1, 1, 1).rectangle(0, 0, 25, 30)
+    # end
+    # rectangulo para el contenido del pdf
+    # canvas.stroke_color(128, 0, 0).rectangle(2, 5, 208, 90).stroke 
+
     filename = "#{inscription.dni}.pdf"
     doc.write("#{dir}/#{filename}", optimize: true)
 
     # custom_pdf = Prawn::Document.new(:page_size => [212,98])
+    # custom_pdf.bounding_box([0, 98], width: 212, height: 98) do
+    #   text 'This text is flowing from the left. ', align: :center
+
+    #   move_down 10
+    #   text 'This text is flowing from the center. ' * 3, align: :center
+
+    #   transparent(0.5) { stroke_bounds }
+    # end
     # custom_pdf.draw_text 'un buen texto al medio', at: [50, 50]
     # tl = HexaPDF::Layout::TextLayouter.new
     # tl.style.align(:center).valign(:top)
@@ -162,8 +202,8 @@ class InscriptionsController < ApplicationController
     #   custom_pdf.text inscription.name, align: :center, valing: :top
     # end
     # custom_pdf.text inscription.company, valing: :bottom
-    #custom_pdf.render_file File.join(Rails.root, "app/assets/iapg", "customisado.pdf")
-
+    # custom_pdf.render_file File.join(Rails.root, "app/assets/iapg", "customisado.pdf")
+    pdf_custom(dir)
     send_file( "#{dir}/#{filename}", filename: filename, type: 'application/pdf', disposition: 'attachment')
   end
 
