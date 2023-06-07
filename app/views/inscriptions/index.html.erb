@@ -1,6 +1,6 @@
 <h1>Inscripciones</h1>
 
-<%# link_to "<i class='fa fa-plus'></i> Registrar institución".html_safe, new_institution_path(), remote: true, class: 'btn u-btn-outline-primary u-btn-hover-v1-2 mb-2' %>
+<p>Asistencia: <%= @confirm %></p>
 
 <%= render( partial: 'shared/table', 
             locals: { table_id: 'inscriptions', 
