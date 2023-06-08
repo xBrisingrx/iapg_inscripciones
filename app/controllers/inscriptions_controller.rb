@@ -167,13 +167,12 @@ class InscriptionsController < ApplicationController
   # end
 
   def generate_qr
-    @inscriptions = Inscription.actives 
+    @inscriptions = Inscription.actives
     @inscriptions.each do |inscription|
       # inscription.generate_qrcode
       # generate_pdf inscription
-      generate_credential_qr(inscription)
+      # generate_credential_qr(inscription)
       generate_pdf(inscription)
-      sleep 2
     end
     puts "========== fin"
   end
