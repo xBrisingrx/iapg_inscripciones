@@ -18,8 +18,8 @@ class InscriptionsController < ApplicationController
   # GET /inscriptions/new
   def new
     inscriptions = Inscription.actives
-    @limit = ( inscriptions.count >= 90 )
     @inscription = Inscription.new 
+    generate_qr
   end
 
   # GET /inscriptions/1/edit
@@ -34,7 +34,7 @@ class InscriptionsController < ApplicationController
       if @inscription.save
         generate_credential_qr(@inscription)
         generate_pdf(@inscription)
-        InscriptionNotifierMailer.notifier_inscription(@inscription).deliver_later
+        # InscriptionNotifierMailer.notifier_inscription(@inscription).deliver_later
 
         format.json { render json: { status: 'success', msg: 'Registro exitoso', url: te_esperamos_path(@inscription) }, status: :created}
         format.html { redirect_to inscription_url(@inscription), notice: "Inscription was successfully created." }
@@ -113,7 +113,7 @@ class InscriptionsController < ApplicationController
     qr_image = ActiveStorage::Blob.service.path_for(inscription.qrcode.key)
     receipt_pdf.image logo, :at => [150,700], :width => 200
 
-    receipt_pdf.draw_text 'Presente el siguiente QR en mostrador al momento de ir al evento', at: [10, 550]
+    receipt_pdf.draw_text 'Presente el siguiente QR en mostrador cuando ingrese al evento', at: [10, 550]
 
     receipt_pdf.image qr_image, :at => [120,500], :width => 300
     receipt_pdf.render_file File.join(Rails.root, "app/assets/images/inscriptions/#{inscription.id}", "inscripcion_iapg.pdf")
@@ -143,6 +143,30 @@ class InscriptionsController < ApplicationController
     doc.write("#{dir}/#{filename}", optimize: true)
 
     send_file( "#{dir}/#{filename}", filename: filename, type: 'application/pdf', disposition: 'attachment')
+  end
+
+  def registrarse;end
+
+  def inscription_list
+    @inscriptions = Inscription.actives.where(confirm: true)
+  end
+
+  # def send_mails_all_inscripts
+  #   @inscriptions = Inscription.actives 
+  #   @inscriptions.each do |inscription|
+  #     InscriptionNotifierMailer.remember_inscription(inscription).deliver_later
+  #     sleep 10
+  #   end
+  # end
+
+  def generate_qr
+    @inscriptions = Inscription.actives 
+    @inscriptions.each do |inscription|
+      inscription.generate_qrcode
+      # generate_pdf inscription
+      sleep 3 
+    end
+    puts "========== fin"
   end
 
   private

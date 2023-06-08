@@ -15,13 +15,13 @@
     </div>
   </div>
 
-  <div class="form-group row g-mb-10">
-    <%= form.label :email, 'Email:', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
+<!--   <div class="form-group row g-mb-10">
+    <%# form.label :email, 'Email:', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
     <div class="col-sm-6 col-md-4">
-      <%= form.email_field :email, class: "form-control u-form-control", placeholder: 'Ingrese correo' ,required: true  %>
+      <%# form.email_field :email, class: "form-control u-form-control", placeholder: 'Ingrese correo' %>
       <small class="form-control-feedback text-danger inscription_email"></small>
     </div>
-  </div>
+  </div> -->
 
   <div class="form-group row g-mb-10">
     <%= form.label :dni, 'DNI:', class: "col-sm-4 col-md-2 col-form-label g-mb-10" %>
@@ -45,9 +45,16 @@
     </label>
   </div>
   <!-- End Toggles Checkbox -->
+  <%if inscription.qrcode.attached?%>
+   <div class="mx-auto">
+      <%= image_tag(inscription.qrcode) %>
+      <%= link_to 'Descargar', rails_blob_path(inscription.qrcode, disposition: "attachment"), class: 'btn u-btn-outline-indigo' %>
+    </div>
+  <%end %>
+ 
 
   <div class="actions">
-    <%= form.submit 'Inscribirse', 
+    <%= form.submit 'Registrar', 
           class: 'btn btn-xl btn-block u-btn-3d u-btn-primary g-font-weight-600 g-letter-spacing-0_5 g-mr-10 g-mb-15' %>
   </div>
 <% end %>

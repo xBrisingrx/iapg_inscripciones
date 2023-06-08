@@ -2,12 +2,13 @@ Rails.application.routes.draw do
   match "/404", via: :all, to: "errors#not_found"
   match "/500", via: :all, to: "errors#internal_server_error"
 
-  get 'registrarse', to: 'inscriptions#new', as: 'registrarse'
+  get 'registrarse', to: 'inscriptions#registrarse', as: 'registrarse'
   get 'te_esperamos/:id', to: 'inscriptions#show', as: 'te_esperamos'
 
   resources :inscriptions do
     get 'credential'
     post 'disable', on: :collection
+    get 'inscription_list', on: :collection
     get 'pdf_inscripcion/:inscription_id', to: 'inscriptions#pdf_inscription', as: 'pdf_inscripcion'
   end
   root 'inscriptions#index'

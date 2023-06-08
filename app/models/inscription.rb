@@ -21,11 +21,11 @@ class Inscription < ApplicationRecord
 	has_one_attached :qrcode
 	validates :name, presence: true 
 	validates :company, presence: true 
-	validates :email, presence: true, 
-    format: {
-      with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i,
-      message: 'Ingrese un correo valido'
-    }
+	# validates :email, presence: true, 
+  #   format: {
+  #     with: /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i,
+  #     message: 'Ingrese un correo valido'
+  #   }
 
   # validates :pay_method, presence: { message: 'Seleccione un metodo de pago' }
   validates :dni, presence: true,
@@ -48,8 +48,6 @@ class Inscription < ApplicationRecord
     end
   end
   
-  private
-  
   def generate_qrcode
     # Get the host
     # host = Rails.application.routes.default_url_options[:host]
@@ -57,7 +55,7 @@ class Inscription < ApplicationRecord
     
     # Create the QR code object
     # qrcode = RQRCode::QRCode.new("http://#{host}/posts/#{id}")
-    qrcode = RQRCode::QRCode.new("http://192.168.0.23/inscriptions/#{self.id}/credential")
+    qrcode = RQRCode::QRCode.new("https://inscripcionessur.iapg.org.ar/inscriptions/#{self.id}/credential")
 
     # Create a new PNG object
     png = qrcode.as_png(

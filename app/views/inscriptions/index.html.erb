@@ -1,13 +1,21 @@
 <h1>Inscripciones</h1>
 
 <p>Asistencia: <%= @confirm %></p>
-
+</div>
+<div class="row justify-content-between">
+  <div class="col-4">
+    <%= link_to "<i class='fa fa-user'></i>Nueva inscripcion".html_safe, new_inscription_path, class: 'btn btn-primary ', remote: true %>
+  </div>
+  <div class="col-4">
+    <%= link_to "<i class='fa fa-users'></i> Lista asistencia".html_safe, inscription_list_inscriptions_path(format: :xlsx ), class: 'btn u-btn-outline-pink u-btn-hover-v1-2 mb-2 ml-2'%>
+  </div>
+</div>
 <%= render( partial: 'shared/table', 
             locals: { table_id: 'inscriptions', 
                       color: 'blue', 
                       icon: 'fa-home',
                       title: "Inscripciones registradas", 
-                      col_names: [ 'Empresa', 'Nombre','DNI','Email','Forma de pago','Celiaco', 'Acciones' ] }) %>
+                      col_names: [ 'Empresa', 'Nombre','DNI','Email','Forma de pago','Celiaco', 'Asistio' ,'Acciones' ] }) %>
 
 <!-- Modal para eliminar inscription -->
 <div class="modal fade" id="modal-disable-inscription" role="dialog" aria-hidden="true">

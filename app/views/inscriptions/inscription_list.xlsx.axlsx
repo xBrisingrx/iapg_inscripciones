@@ -1,0 +1,19 @@
+wb = xlsx_package.workbook
+wb.styles do |style|
+	grey_cell = style.add_style(bg_color: "C4C4C4", border: Axlsx::STYLE_THIN_BORDER, :alignment => { :horizontal=> :center })
+	no_bg_cell = style.add_style(border: Axlsx::STYLE_THIN_BORDER, :alignment => { :horizontal=> :center })
+	title_cell = style.add_style( :b => true, :sz => 12, :bg_color => "4BE9FF",
+		:alignment => { :horizontal=> :center }, 
+		border: Axlsx::STYLE_THIN_BORDER )
+
+		wb.add_worksheet(name: "Unificador") do |sheet|
+		sheet.add_row ['Nombre', 'DNI', 'Empresa'], style: title_cell
+	  @inscriptions.each_with_index do |inscription, index|
+	  	if index.odd?
+	  		sheet.add_row [inscription.name, inscription.dni, inscription.company], style: grey_cell
+	  	else
+	  		sheet.add_row [inscription.name, inscription.dni, inscription.company], style: no_bg_cell
+	  	end
+	  end
+	end
+end

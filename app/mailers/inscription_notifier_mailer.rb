@@ -14,4 +14,11 @@ class InscriptionNotifierMailer < ApplicationMailer
     mail( :to => inscription.email,
     :subject => 'Registro exitoso' )
   end
+
+  def remember_inscription inscription
+    @inscription = inscription
+    attachments['inscripcion_iapg.pdf'] = File.read( Rails.root.join("app/assets/images/inscriptions/#{@inscription.id}/inscripcion_iapg.pdf"))
+    mail( :to => inscription.email,
+    :subject => 'Registro exitoso' )
+  end
 end

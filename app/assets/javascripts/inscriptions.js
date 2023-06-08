@@ -15,6 +15,7 @@ $(document).ready(function(){
       {'data': 'email'},
       {'data': 'pay_method'},
       {'data': 'celiac'},
+      {'data': 'confirm'},
       {'data': 'actions'}
     ],
     'language': {'url': datatables_lang}

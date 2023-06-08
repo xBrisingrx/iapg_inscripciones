@@ -1,0 +1,12 @@
+$("#modal").html("<%= j (render partial: 'shared/modal', locals:{ size: 'lg', content: 'form', inscription: @inscription } ) %>")
+$("#modal").modal('show')
+
+$("#form-inscription").on("ajax:success", function(event) {
+    inscriptions_table.ajax.reload(null,false)
+    let msg = JSON.parse(event.detail[2].response)
+    noty_alert(msg.status, msg.msg)
+    $("#modal").modal('hide')
+  }).on("ajax:error", function(event) {
+	let msg = JSON.parse( event.detail[2].response )
+	set_input_status_form('form-inscription', 'inscription', msg)
+})
