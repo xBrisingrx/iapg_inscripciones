@@ -171,8 +171,8 @@ class InscriptionsController < ApplicationController
     @inscriptions.each do |inscription|
       # inscription.generate_qrcode
       # generate_pdf inscription
-      generate_credential_qr(inscription)
-      # generate_pdf(inscription)
+      # generate_credential_qr(inscription)
+      generate_pdf(inscription)
     end
     puts "========== fin"
   end
