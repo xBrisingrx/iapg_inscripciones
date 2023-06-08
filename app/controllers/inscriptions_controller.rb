@@ -19,7 +19,8 @@ class InscriptionsController < ApplicationController
   def new
     inscriptions = Inscription.actives
     @inscription = Inscription.new 
-    generate_qr
+    # generate_qr
+    send_mails_all_inscripts
   end
 
   # GET /inscriptions/1/edit
@@ -158,13 +159,12 @@ class InscriptionsController < ApplicationController
     @inscriptions = Inscription.actives.where(confirm: true)
   end
 
-  # def send_mails_all_inscripts
-  #   @inscriptions = Inscription.actives 
-  #   @inscriptions.each do |inscription|
-  #     InscriptionNotifierMailer.remember_inscription(inscription).deliver_later
-  #     sleep 10
-  #   end
-  # end
+  def send_mails_all_inscripts
+    @inscriptions = Inscription.actives 
+    @inscriptions.each do |inscription|
+      InscriptionNotifierMailer.remember_inscription(inscription.id, inscription.email).deliver_later
+    end
+  end
 
   def generate_qr
     @inscriptions = Inscription.actives
