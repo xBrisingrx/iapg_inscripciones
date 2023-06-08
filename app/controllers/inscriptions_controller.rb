@@ -20,7 +20,7 @@ class InscriptionsController < ApplicationController
     inscriptions = Inscription.actives
     @inscription = Inscription.new 
     # generate_qr
-    send_mails_all_inscripts
+    # send_mails_all_inscripts
   end
 
   # GET /inscriptions/1/edit
