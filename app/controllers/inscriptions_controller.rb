@@ -32,7 +32,7 @@ class InscriptionsController < ApplicationController
     @inscription.celiac = ( !params[:inscription][:celiac].nil? )
     respond_to do |format|
       if @inscription.save
-        generate_credential_qr(@inscription)
+        # generate_credential_qr(@inscription)
         generate_pdf(@inscription)
         # InscriptionNotifierMailer.notifier_inscription(@inscription).deliver_later
 
@@ -83,9 +83,9 @@ class InscriptionsController < ApplicationController
   end
 
   def generate_credential_qr inscription
-    url = url_for(action: 'credential', inscription_id: inscription.id, only_path: false)
+    # url = url_for(action: 'credential', inscription_id: inscription.id, only_path: false)
     # url = inscription_credential_path(inscription)
-    qrcode = RQRCode::QRCode.new( "http://192.168.1.10:3000/inscriptions/#{inscription.id}/credential" )
+    qrcode = RQRCode::QRCode.new("https://inscripcionessur.iapg.org.ar/inscriptions/#{inscription.id}/credential")
     png = qrcode.as_png(
       bit_depth: 1,
       border_modules: 4,
@@ -98,6 +98,13 @@ class InscriptionsController < ApplicationController
       resize_gte_to: false,
       size: 120
     )
+    # Attach the QR code to the active storage
+    inscription.qrcode.attach(
+      io: StringIO.new(png.to_s),
+      filename: "qrcode.png",
+      content_type: "image/png",
+    )
+
     dir = Rails.root.join("app/assets/images/inscriptions/#{inscription.id}")
     if File.exist?( dir )
       IO.binwrite("#{dir}/inscription_qr.png", png.to_s)
@@ -162,9 +169,11 @@ class InscriptionsController < ApplicationController
   def generate_qr
     @inscriptions = Inscription.actives 
     @inscriptions.each do |inscription|
-      inscription.generate_qrcode
+      # inscription.generate_qrcode
       # generate_pdf inscription
-      sleep 3 
+      generate_credential_qr(inscription)
+      generate_pdf(inscription)
+      sleep 2
     end
     puts "========== fin"
   end
