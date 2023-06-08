@@ -34,7 +34,7 @@ class InscriptionsController < ApplicationController
     respond_to do |format|
       if @inscription.save
         # generate_credential_qr(@inscription)
-        generate_pdf(@inscription)
+        # generate_pdf(@inscription)
         # InscriptionNotifierMailer.notifier_inscription(@inscription).deliver_later
 
         format.json { render json: { status: 'success', msg: 'Registro exitoso', url: te_esperamos_path(@inscription) }, status: :created}
